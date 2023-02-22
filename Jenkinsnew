@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    tools {
+    	maven "Maven3"
+    } 
+    environment {
+        registry = "288020836064.dkr.ecr.ap-south-1.amazonaws.com/demo-eks"
+    }
+    stages {
+        stage("Clone"){
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/venugopalpbv/amazon-eks-jenkins-terraform.git']]])   
+            }
+        }
+	  stage('Build'){
+		steps{
+			sh "mvn clean package"
+		}
+	  }
+        stage('Building image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry 
+                    // docker.build('pet-clinic') 
+                }
+            }
+        }
+        stage('Pushing to ECR') {
+            steps {
+                script {
+                    // sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/a4q0c4m6'
+                    // sh 'docker push public.ecr.aws/a4q0c4m6/demo-eks'
+                    docker.withRegistry('https://288020836064.dkr.ecr.ap-northeast-1.amazonaws.com', 'ecr:ap-south-1:AWS') {
+                        docker.image('288020836064.dkr.ecr.ap-south-1.amazonaws.com/pet-clinic').push('latest')
+                    }
+                }
+                
+            }
+        }
+        stage('K8S Deploy') {
+            steps {
+                withKubeConfig([credentialsId: 'K8S', serverUrl: '']) {
+                    sh ('kubectl apply -f  kubernetes/petclinic.yaml')
+                }
+            }
+        }
+    }
+}
