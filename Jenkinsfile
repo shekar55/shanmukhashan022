@@ -4,13 +4,13 @@ pipeline {
         stage('Clone Repo') {
           steps {
             sh 'rm -rf shanmukhashan022'
-            sh 'git clone https://github.com/shanmukhashan022/shanmukhashan022.git'
+            sh 'git clone https://github.com/shekar55/shanmukhashan022.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-              sh 'docker build -t shanmukhashan022/new_jenkins1:latest .'
+              sh 'docker build -t chandu5562/demo:latest .'
               }
         }
         stage('Push Docker image') {
@@ -19,7 +19,7 @@ pipeline {
             }
             steps {
                 sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
-                sh    'docker push shanmukhashan022/new_jenkins1:latest'
+                sh    'docker push chandu5562/demo:latest'
             }
         }
           
@@ -33,7 +33,7 @@ pipeline {
         stage('Check WebApp Rechability') {
           steps {
           sh 'sleep 10s'
-          sh ' curl http://3.108.67.219:30007'
+          sh ' curl http://13.235.13.231:30007'
           }
         }
         
