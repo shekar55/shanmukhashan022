@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-    	maven "Maven3"
-    } 
+    
     environment {
         registry = "288020836064.dkr.ecr.ap-south-1.amazonaws.com/demo-eks"
     }
@@ -12,11 +10,7 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shekar55/shanmukhashan022.git']])
 		}
         }
-	  stage('Build'){
-		steps{
-			sh "mvn clean package"
-		}
-	  }
+	 
         stage('Building image') {
             steps {
                 script {
