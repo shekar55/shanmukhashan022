@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage("Clone"){
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/venugopalpbv/amazon-eks-jenkins-terraform.git']]])   
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', https://github.com/shekar55/shanmukhashan022.git']]])   
             }
         }
 	  stage('Build'){
