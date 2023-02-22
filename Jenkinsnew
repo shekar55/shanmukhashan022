@@ -9,8 +9,8 @@ pipeline {
     stages {
         stage("Clone"){
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', https://github.com/shekar55/shanmukhashan022.git']]])   
-            }
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shekar55/shanmukhashan022.git']])
+		}
         }
 	  stage('Build'){
 		steps{
