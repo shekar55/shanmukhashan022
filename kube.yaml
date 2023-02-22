@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: 288020836064.dkr.ecr.ap-south-1.amazonaws.com/demo-eks:latest
+        image: chandu5562/demo
         ports:
         - containerPort: 8000
         imagePullPolicy: Always
