@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: shanmukhashan022/new_jenkins1
+        image: 288020836064.dkr.ecr.ap-south-1.amazonaws.com/demo-eks:latest
         ports:
         - containerPort: 8000
         imagePullPolicy: Always
