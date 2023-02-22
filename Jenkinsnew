@@ -40,7 +40,7 @@ pipeline {
         stage('K8S Deploy') {
             steps {
                 withKubeConfig([credentialsId: 'K8S', serverUrl: '']) {
-                    sh ('kubectl apply -f  kubernetes/petclinic.yaml')
+                    sh ('kubectl apply -f  kube.yaml')
                 }
             }
         }
