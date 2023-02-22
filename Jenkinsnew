@@ -40,7 +40,7 @@ pipeline {
         stage('K8S Deploy') {
             steps {
                 withKubeConfig([credentialsId: 'K8S', serverUrl: '']) {
-                    sh ('kubectl apply -f shanmukhashan022/Kubeecr.yaml')
+                    sh ('kubectl apply -f Kubeecr.yaml')
                 }
             }
         }
